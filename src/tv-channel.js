@@ -34,11 +34,11 @@ export class TvChannel extends LitElement {
   // LitElement rendering template of your element
   render() {
     return html`
-      <div class="wrapper">
+      <!-- <div class="wrapper">
         <h3>${this.title}</h3>
         <h4>${this.presenter}</h4>
         <slot></slot>
-      </div>  
+      </div>   -->
       `;
   }
 }

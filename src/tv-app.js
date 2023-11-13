@@ -2,8 +2,10 @@
 import { LitElement, html, css } from 'lit';
 import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 import '@shoelace-style/shoelace/dist/components/button/button.js';
+import '@lrnwebcomponents/video-player/video-player.js';
 import "./tv-channel.js";
 
+const data = "../assets/channels.json"
 export class TvApp extends LitElement {
   // defaults
   constructor() {
@@ -33,48 +35,43 @@ export class TvApp extends LitElement {
         margin: 16px;
         padding: 16px;
       }
+      .grid-container 
+      {
+        display: grid;
+        grid-template-columns: auto auto;
+        background-color: white;
+        padding: 10px;
+        gap: 10px;
+      }
+      .grid-item1
+      {
+          height: 357px;
+          width: 500px;
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          background-color: grey;
+      }
+      .grid-item2
+        {
+          height: 700px;
+          width: 400px;
+          border: 1px solid rgba(0, 0, 0, 0.8);
+          background-color: grey;
+        }
       `
     ];
   }
   // LitElement rendering template of your element
   render() {
-    return html`
-      <h2>${this.name}</h2>
-      ${
-        this.listings.map(
-          (item) => html`
-            <tv-channel 
-              title="${item.title}"
-              presenter="${item.metadata.author}"
-              @click="${this.itemClick}"
-            >
-            </tv-channel>
-          `
-        )
-      }
-      <div>
-        <!-- video -->
-        <!-- discord / chat - optional -->
+    return html `
+     <div class="grid-container">
+    <div class="grid-item1"><video-player source= 
+    "https://www.youtube.com/watch?v=zLAYGZeVTPQ"></video-player></div>
+    <div class="grid-item2">
+    </div>
       </div>
-      <!-- dialog -->
-      <sl-dialog label="Dialog" class="dialog">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        <sl-button slot="footer" variant="primary" @click="${this.closeDialog}">Close</sl-button>
-      </sl-dialog>
-    `;
-  }
-
-  closeDialog(e) {
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.hide();
-  }
-
-  itemClick(e) {
-    console.log(e.target);
-    const dialog = this.shadowRoot.querySelector('.dialog');
-    dialog.show();
-  }
-
+    `
+    }
+     
   // LitElement life cycle for when any property changes
   updated(changedProperties) {
     if (super.updated) {
@@ -87,12 +84,21 @@ export class TvApp extends LitElement {
     });
   }
 
-  async updateSourceData(source) {
-    await fetch(source).then((resp) => resp.ok ? resp.json() : []).then((responseData) => {
-      if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) {
-        this.listings = [...responseData.data.items];
-      }
-    });
+  async updateSourceData(data) {
+    await fetch(data)
+      .then((resp) => resp.ok ? resp.json() : [])
+      .then((responseData) => {
+        if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) 
+        {
+          this.listings= responseData.data.items.map(item => item.timecode);
+          console.log(this.listings);
+          this.updateVideoTime();
+        }
+      });
+  }
+  
+  updateVideoTime() {
+    
   }
 }
 // tell the browser about our tag and class it should run when it sees it
