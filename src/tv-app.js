@@ -46,16 +46,29 @@ export class TvApp extends LitElement {
       .grid-item1
       {
           height: 357px;
-          width: 500px;
-          border: 1px solid rgba(0, 0, 0, 0.8);
-          background-color: grey;
+          width: 700px;
+          
       }
       .grid-item2
         {
-          height: 700px;
+          height: 900px;
           width: 400px;
           border: 1px solid rgba(0, 0, 0, 0.8);
           background-color: grey;
+        }
+        .scroll-container 
+        {
+          width: 350px;
+          height: 850px;
+          overflow-y: auto;
+          padding-top: 5px;
+          padding-left: 25px;
+        }
+        .grid-item3
+        {
+          width: 700px;
+          height: 350px;
+          background-color: black;
         }
       `
     ];
@@ -63,13 +76,26 @@ export class TvApp extends LitElement {
   // LitElement rendering template of your element
   render() {
     return html `
-     <div class="grid-container">
-    <div class="grid-item1"><video-player source= 
-    "https://www.youtube.com/watch?v=zLAYGZeVTPQ"></video-player></div>
-    <div class="grid-item2">
-    </div>
+      <div class="grid-container">
+        <div class="grid-item1">
+          <video-player source="https://www.youtube.com/watch?v=zLAYGZeVTPQ&t=30s"></video-player>
+          <div class="grid-item3">
       </div>
-    `
+        </div>
+        <div class="grid-item2">
+        <div class="scroll-container">
+        ${
+          this.listings.map(
+            (timecode) => html`
+               <iframe width="350" height="200" src="https://www.youtube.com/embed/zLAYGZeVTPQ?start=${timecode}" allowfullscreen></iframe>
+            `
+          )
+        }
+        </div>
+        </div>
+      </div>
+      
+    `;
     }
      
   // LitElement life cycle for when any property changes
@@ -90,8 +116,8 @@ export class TvApp extends LitElement {
       .then((responseData) => {
         if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) 
         {
-          this.listings= responseData.data.items.map(item => item.timecode);
-          console.log(this.listings);
+          this.listings= responseData.data.items.map(item => item.metadata.timecode);
+         
           this.updateVideoTime();
         }
       });
