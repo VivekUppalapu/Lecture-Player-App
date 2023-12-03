@@ -13,8 +13,8 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title": "Greek Mythology: Persophone",
-        "description": "The story of Persophone and the Underworld",
+        "title": "The start",
+        "description": "Demeter: the goddess of Agriculture, Grain, and Fertility Persephone: Demeter's daugther", 
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 0,
@@ -28,11 +28,11 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "Demeter and Persephone",
+        "title":"Hades and the day of Persephone's kidnap",
+        "description": "Hades: King of the underworld",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
-          "timecode": 30,
+          "timecode": 35,
           "author":"TedEd",
           "created": 1697033522,
           "updated": 1697034021
@@ -43,8 +43,8 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Persephone's kidnap",
+        "description": "Persephone ends up in the Underworld;The Underworld is where dead souls end up in",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 51,
@@ -58,8 +58,8 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Demeter's search",
+        "description": "Demeter realizes that Zeus agreed with Hades taking away Persephone. She searchers for Persehpone on her own",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 84,
@@ -73,11 +73,11 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Persephone in the Underworld",
+        "description": "IDK what to say",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
-          "timecode": 109,
+          "timecode": 117,
           "author":"TedEd",
           "created": 1697033522,
           "updated": 1697034021
@@ -88,8 +88,8 @@
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Persephone's current life in the Underworld",
+        "description": "Still idk",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 143,
@@ -99,12 +99,12 @@
         }
       },
       {
-        "id": "789ghi",
+        "id": "ABC123",
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Demeter's continued Search",
+        "description": "IDK IDK",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 182,
@@ -114,27 +114,28 @@
         }
       },
       {
-        "id": "789ghi",
+        "id": "DEF456",
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"Persephone's fate",
+        "description": "IDK MAN",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 220,
+
           "author":"TedEd",
           "created": 1697033522,
           "updated": 1697034021
         }
       },
       {
-        "id": "789ghi",
+        "id": "GHI789",
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"The pact",
+        "description": "IDK man, really",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 250,
@@ -144,12 +145,12 @@
         }
       },
       {
-        "id": "789ghi",
+        "id": "000",
         "indent": 0,
         "order": 0,
         "parent": null,
-        "title":"Greek Mythology: Persephone",
-        "description": "...",
+        "title":"End",
+        "description": "IDK",
         "metadata": {
           "source": "https://www.youtube.com/watch?v=zLAYGZeVTPQ",
           "timecode": 292,

@@ -5,7 +5,6 @@ import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@lrnwebcomponents/video-player/video-player.js';
 import "./tv-channel.js";
 
-const data = "../assets/channels.json"
 export class TvApp extends LitElement {
   // defaults
   constructor() {
@@ -13,6 +12,12 @@ export class TvApp extends LitElement {
     this.name = '';
     this.source = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
+    this.sourceVideo = "https://www.youtube.com/watch?v=zLAYGZeVTPQ";
+    this.currentInfo={
+      title: null,
+      timecode: null,
+      description: null,
+    }
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -24,6 +29,7 @@ export class TvApp extends LitElement {
       name: { type: String },
       source: { type: String },
       listings: { type: Array },
+      currentInfo:{type: Object}
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -49,6 +55,10 @@ export class TvApp extends LitElement {
           width: 700px;
           
       }
+      .videoScreen{
+        height: 357px;
+          width: 700px; 
+      } 
       .grid-item2
         {
           height: 900px;
@@ -64,12 +74,14 @@ export class TvApp extends LitElement {
           padding-top: 5px;
           padding-left: 25px;
         }
-        .grid-item3
+        .descriptionSlides
         {
           width: 700px;
-          height: 350px;
+          height: 250px;
           background-color: black;
+          border:  1px solid red;
         }
+        
       `
     ];
   }
@@ -77,28 +89,50 @@ export class TvApp extends LitElement {
   render() {
     return html `
       <div class="grid-container">
-        <div class="grid-item1">
-          <video-player source="https://www.youtube.com/watch?v=zLAYGZeVTPQ&t=30s"></video-player>
-          <div class="grid-item3">
-      </div>
-        </div>
-        <div class="grid-item2">
-        <div class="scroll-container">
+      <div class="grid-item2">
+        <div class="scroll-container"> 
+        
         ${
           this.listings.map(
-            (timecode) => html`
-               <iframe width="350" height="200" src="https://www.youtube.com/embed/zLAYGZeVTPQ?start=${timecode}" allowfullscreen></iframe>
+            (list) => html`
+            <tv-channel
+            title= "${list.title}"
+            timecode= "${list.metadata.timecode}"
+            @click="${this.currentItem}"
+          >
+          </tv-channel>
             `
           )
         }
         </div>
         </div>
+        <div class="grid-item1">
+          <video-player source="${this.sourceVideo}"></video-player>
+          <div class="descriptionSlides">
+            
       </div>
+        </div>
+        </div>
       
     `;
     }
      
   // LitElement life cycle for when any property changes
+
+
+  currentItem(e) {
+    
+    console.log(e.target);
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
+    this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(e.target.timecode);
+  }
+   
+  currentVidTime()
+  {
+    timeNow = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector("a11y-media-player").media.currentTime;
+    
+  }
+
   updated(changedProperties) {
     if (super.updated) {
       super.updated(changedProperties);
@@ -116,16 +150,14 @@ export class TvApp extends LitElement {
       .then((responseData) => {
         if (responseData.status === 200 && responseData.data.items && responseData.data.items.length > 0) 
         {
-          this.listings= responseData.data.items.map(item => item.metadata.timecode);
-         
-          this.updateVideoTime();
+          this.listings = [...responseData.data.items];
+          
         }
+
       });
   }
   
-  updateVideoTime() {
-    
-  }
+
 }
 // tell the browser about our tag and class it should run when it sees it
 customElements.define(TvApp.tag, TvApp);
