@@ -13,11 +13,7 @@ export class TvApp extends LitElement {
     this.source = new URL('../assets/channels.json', import.meta.url).href;
     this.listings = [];
     this.sourceVideo = "https://www.youtube.com/watch?v=zLAYGZeVTPQ";
-    this.currentInfo={
-      title: null,
-      timecode: null,
-      description: null,
-    }
+    this.currentInfo="";
   }
   // convention I enjoy using to define the tag's name
   static get tag() {
@@ -29,7 +25,7 @@ export class TvApp extends LitElement {
       name: { type: String },
       source: { type: String },
       listings: { type: Array },
-      currentInfo:{type: Object}
+      currentInfo:{type: String}
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -38,30 +34,24 @@ export class TvApp extends LitElement {
       css`
       :host {
         display: block;
-        margin: 16px;
-        padding: 16px;
+        margin: 5px;
       }
       .grid-container 
       {
         display: grid;
         grid-template-columns: auto auto;
         background-color: white;
-        padding: 10px;
-        gap: 10px;
+        padding: 5px;
+        gap: 5px;
       }
       .grid-item1
       {
           height: 357px;
-          width: 700px;
-          
+          width: 600px;
       }
-      .videoScreen{
-        height: 357px;
-          width: 700px; 
-      } 
       .grid-item2
         {
-          height: 900px;
+          height: 820px;
           width: 400px;
           border: 1px solid rgba(0, 0, 0, 0.8);
           background-color: grey;
@@ -69,17 +59,23 @@ export class TvApp extends LitElement {
         .scroll-container 
         {
           width: 350px;
-          height: 850px;
+          height: 800px;
           overflow-y: auto;
           padding-top: 5px;
           padding-left: 25px;
         }
         .descriptionSlides
         {
-          width: 700px;
+          width: 600px;
           height: 250px;
           background-color: black;
-          border:  1px solid red;
+         // border:  1px solid red;
+        }
+        .descriptionContent
+        {
+          font-size: 16px;
+          color: white;
+
         }
         
       `
@@ -87,8 +83,15 @@ export class TvApp extends LitElement {
   }
   // LitElement rendering template of your element
   render() {
-    return html `
+    // this.currentVidTime();
+    return html ` 
       <div class="grid-container">
+      <div class="grid-item1">
+          <video-player source="${this.sourceVideo}"></video-player>
+          <div class="descriptionSlides">
+           <h3 class="descriptionContent"> "${this.currentInfo}"</h3>
+      </div>
+        </div>
       <div class="grid-item2">
         <div class="scroll-container"> 
         
@@ -105,15 +108,8 @@ export class TvApp extends LitElement {
           )
         }
         </div>
-        </div>
-        <div class="grid-item1">
-          <video-player source="${this.sourceVideo}"></video-player>
-          <div class="descriptionSlides">
-            
       </div>
-        </div>
-        </div>
-      
+    </div>
     `;
     }
      
@@ -126,12 +122,24 @@ export class TvApp extends LitElement {
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').play();
     this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').seek(e.target.timecode);
   }
-   
+   descriptionInfo()
+   {
+
+   }
   currentVidTime()
   {
-    timeNow = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector("a11y-media-player").media.currentTime;
-    
-  }
+      const timeNow = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector("a11y-media-player").media.currentTime;
+  
+      this.listings.forEach((list) => {
+        const currentTimecode = list.timecode;
+  
+        // Check if the absolute difference is within the threshold
+        if (Math.abs(timeNow - currentTimecode) < this.timeThreshold) {
+          this.currentInfo = list.description;
+          return;
+        }
+      });
+}
 
   updated(changedProperties) {
     if (super.updated) {
