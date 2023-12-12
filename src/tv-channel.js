@@ -18,6 +18,8 @@ export class TvChannel extends LitElement {
       title: { type: String },
       description:{type: String},
       timecode:{type: String},
+     active:{type: Boolean, reflect: true},
+     index:{type: Number}
     };
   }
   // LitElement convention for applying styles JUST to our element
@@ -26,27 +28,34 @@ export class TvChannel extends LitElement {
       :host {
         display: inline-flex;
       }
+      :host([active])
+      {
+        background-color: red;
+      }
       .wrapper {
-        width: 350px;
-        height: 150px;
-        background-color: white;
-        font-size: 18px;
+        width: 250px;
+        height: 100px;
+        background-color: black;
+        color: white;
+        font-size: 16px;
         text-align: center;
         margin-bottom: 5px;
         font-family: 'Open Sans', sans-serif;
+        align-items: center;
       }
     `;
   }
   // LitElement rendering template of your element
   render() {
-    return html`
+    {
+      return html`
       <div class="wrapper">
         <h3>${this.title}</h3>
         <h4>${this.timecode}</h4>
-
-        <slot></slot>
       </div>  
       `;
+    }
+    
   }
 }
 // tell the browser about our tag and class it should run when it sees it
