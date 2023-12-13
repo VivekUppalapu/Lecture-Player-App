@@ -137,12 +137,9 @@ export class TvApp extends LitElement {
     `;
     }
      
-  // LitElement life cycle for when any property changes
-
   connectedCallback() {
    this.changeSlide();
    super.connectedCallback(); 
-   
   }
   prevSlide()
   {
@@ -203,5 +200,5 @@ changeSlide()
   
 
 }
-// tell the browser about our tag and class it should run when it sees it
+
 customElements.define(TvApp.tag, TvApp);
