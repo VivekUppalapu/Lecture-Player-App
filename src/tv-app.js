@@ -55,7 +55,7 @@ export class TvApp extends LitElement {
           height: 850px;
           width: 400px;
           border: 1px solid rgba(0, 0, 0, 0.8);
-          background-color: grey;
+          background-color: lightgray;
           
         }
         .scrollBar
@@ -79,6 +79,7 @@ export class TvApp extends LitElement {
           padding-top: 10px;
           font-size: 23px;
           color: white;
+          padding-left: 5px;
         }
         .prevButton
         {
@@ -114,7 +115,7 @@ export class TvApp extends LitElement {
       
         </div>
       <div class="lecture-slide-list">
-      <button class="prevButton" @click="${this.prevSlide}"> Previous Button</button> <button class="nextButton" @click="${this.nextSlide}"> Next Button </button>
+      <button class="prevButton" @click="${this.prevSlide}"> Previous</button> <button class="nextButton" @click="${this.nextSlide}"> Next </button>
         <div class="scrollBar"> 
         ${
           this.listings.map(
@@ -153,6 +154,7 @@ export class TvApp extends LitElement {
   }
 changeSlide()
 {
+  
   setInterval(() => {
     const currentTime = this.shadowRoot.querySelector('video-player').shadowRoot.querySelector('a11y-media-player').media.currentTime;
 

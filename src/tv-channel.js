@@ -33,10 +33,10 @@ export class TvChannel extends LitElement {
         background-color: red;
       }
       .wrapper {
-        width: 250px;
-        height: 100px;
-        background-color: black;
-        color: white;
+        width: 280px;
+        height: 120px;
+        background-color: white;
+        color: black;
         font-size: 16px;
         text-align: center;
         margin-bottom: 5px;
